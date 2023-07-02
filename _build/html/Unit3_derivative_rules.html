@@ -1,0 +1,946 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>3. Derivative Rules &#8212; Calculus for Computing</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/calc.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/calc.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Unit3_derivative_rules';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="4. Chain Rule" href="Unit4_chain_rule.html" />
+    <link rel="prev" title="2. The Derivative" href="Unit2_derivative.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Calculus for Computing
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Unit1_introduction.html">1. Introduction to Calculus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Unit2_derivative.html">2. The Derivative</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Derivative Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Unit4_chain_rule.html">4. Chain Rule</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2FUnit3_derivative_rules.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/Unit3_derivative_rules.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Derivative Rules</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#infinitesimals">3.1. Infinitesimals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-excercise">3.1.1. Example/Excercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-expansion-of-a-b-n">3.1.2. Review: Expansion of <span class="math notranslate nohighlight">\((a+b)^n\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-exercise">3.1.2.1. Example/Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#digression-pascal-s-triangle">3.1.3. Digression: Pascal’s triangle</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.1.3.1. Example/Exercise</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-rule">3.2. Power Rule</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-exercises">3.2.1. Examples/Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-rule">3.3. Product Rule</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.3.1. Examples/Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quotient-rule">3.4. Quotient Rule</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.4.1. Examples/Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linearity-of-differentiation">3.5. Linearity of differentiation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.5.1. Examples/Exercises</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <p><span class="math notranslate nohighlight">\(\newcommand{\ds}{\displaystyle}\newcommand{\Choose}[2]{\,_{#1}\hspace{0mm}\text{C}_{#2}\,}\newcommand{\bigO}[1]{{\cal O}(#1)}\)</span></p>
+<section class="tex2jax_ignore mathjax_ignore" id="derivative-rules">
+<h1><span class="section-number">3. </span>Derivative Rules<a class="headerlink" href="#derivative-rules" title="Permalink to this heading">#</a></h1>
+<section id="infinitesimals">
+<h2><span class="section-number">3.1. </span>Infinitesimals<a class="headerlink" href="#infinitesimals" title="Permalink to this heading">#</a></h2>
+<p>An <em>infinitesimal</em> is a “number” whose absolute value is smaller than any positive real number. It is analogous to infinity, which is larger than any real number.</p>
+<p>Let <span class="math notranslate nohighlight">\(dx\)</span> be an infinitesimal. That is, imagine, for example,</p>
+<div class="math notranslate nohighlight">
+\[
+|dx| &lt; 0.000000000000000000000000000000000000000000000000000001.
+\]</div>
+<p>Then the derivative of a function <span class="math notranslate nohighlight">\(f(x)\)</span> can be written, without using limit, as</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{df}{dx} = f'(x) = \frac{f(x+dx)-f(x)}{dx},
+\]</div>
+<p>which, in turn, can be rewritten as</p>
+<div class="math notranslate nohighlight" id="equation-linearapp">
+<span class="eqno">(3.1)<a class="headerlink" href="#equation-linearapp" title="Permalink to this equation">#</a></span>\[
+f(x+dx) = f(x) + f'(x)\cdot dx.
+\]</div>
+<p>That is, the coefficient of <span class="math notranslate nohighlight">\(dx\)</span> is the derivative <span class="math notranslate nohighlight">\(f'(x)\)</span>.
+This equation states that</p>
+<div class="math notranslate nohighlight">
+\[
+\text{(value of } f \text{ at } x+dx) = (\text{value of } f \text{ at } x) + (\text{slope at } x)\cdot dx.
+\]</div>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">));</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">6</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="n">x</span><span class="o">**</span><span class="mi">3</span><span class="o">/</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mf">8.89</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="mf">8.89</span><span class="p">,</span><span class="mf">8.89</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;dashed&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],[</span><span class="s1">&#39;$x$&#39;</span><span class="p">,</span> <span class="s1">&#39;$x+dx$&#39;</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([</span><span class="mi">6</span><span class="p">,</span><span class="mf">8.89</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;$f(x)$&#39;</span><span class="p">,</span> <span class="s1">&#39;$f(x+dx)$&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;slope $= f&#39;(x) = \frac</span><span class="si">{df}{dx}</span><span class="s2">$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/94bbc308e5e71da2ea1342547df7dd4b87dfb826c2a5ffc7fc31ca26db7461fb.png" src="_images/94bbc308e5e71da2ea1342547df7dd4b87dfb826c2a5ffc7fc31ca26db7461fb.png" />
+</div>
+</div>
+<p>The infinitesimal <span class="math notranslate nohighlight">\(dx\)</span> is similar to any real number, except that <span class="math notranslate nohighlight">\(\ds\frac{1}{|dx|} = \infty\)</span> and</p>
+<div class="math notranslate nohighlight" id="equation-dx2is0">
+<span class="eqno">(3.2)<a class="headerlink" href="#equation-dx2is0" title="Permalink to this equation">#</a></span>\[
+dx^2 = 0 ~~\text{or}~~ dx^n = 0 \text{ for } n &gt; 1.
+\]</div>
+<p>We will extensively make use of <a class="reference internal" href="#equation-linearapp">(3.1)</a> and <a class="reference internal" href="#equation-dx2is0">(3.2)</a> in the following sections.</p>
+<section id="example-excercise">
+<h3><span class="section-number">3.1.1. </span>Example/Excercise<a class="headerlink" href="#example-excercise" title="Permalink to this heading">#</a></h3>
+<p>Expand <span class="math notranslate nohighlight">\((x+dx)^2\)</span> and <span class="math notranslate nohighlight">\((x+dx)^3\)</span>. Identify the derivatives of <span class="math notranslate nohighlight">\(x^2\)</span> and <span class="math notranslate nohighlight">\(x^3\)</span> based on Eq.<a class="reference internal" href="#equation-linearapp">(3.1)</a>.</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\((x+dx)^2 = x^2 + 2x dx ~~\therefore (x^2)' = 2x\)</span></p>
+<p><span class="math notranslate nohighlight">\((x+dx)^3 = x^3 + 3x^2 dx ~~\therefore (x^3)' = 3x^2\)</span></p>
+</div>
+</section>
+<section id="review-expansion-of-a-b-n">
+<h3><span class="section-number">3.1.2. </span>Review: Expansion of <span class="math notranslate nohighlight">\((a+b)^n\)</span><a class="headerlink" href="#review-expansion-of-a-b-n" title="Permalink to this heading">#</a></h3>
+<p>Recall</p>
+<div class="math notranslate nohighlight">
+\[(a+b)^2 =(a+b)(a+b) =  a^2 + 2ab + b^2\]</div>
+<p>and</p>
+<div class="math notranslate nohighlight">
+\[(a+b)^3 = (a+b)(a^2+2ab+b^2) = a^3 + 3a^2b + 3ab^2 + b^3.\]</div>
+<p>What about <span class="math notranslate nohighlight">\((a+b)^n\)</span> with a large <span class="math notranslate nohighlight">\(n\)</span>? Do we have to expand it one by one like we just did?  The answer is no.
+There is a formula for it:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-d20cb067-ab68-4cc6-97a2-6399838abeda">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-d20cb067-ab68-4cc6-97a2-6399838abeda" title="Permalink to this equation">#</a></span>\[\begin{align}
+(a+b)^n &amp;= a^n + \Choose{n}{1}a^{n-1}b + \Choose{n}{2}a^{n-2}b^2 +\Choose{n}{3}a^{n-3}b^3+\cdots\nonumber\\
+&amp; \hspace{15mm} \cdots + \Choose{n}{n-3}a^{3}b^{n-3} + \Choose{n}{n-2}a^{2}b^{n-2} + \Choose{n}{n-1}a^{}b^{n-1} + b^n\\
+&amp;= \sum_{k=0}^n  \Choose{n}{k}a^{n-k}b^k ~~
+\text{where }\Choose{n}{k} = \frac{n!}{(n-k)! k!}.
+\end{align}\]</div>
+<p><span class="math notranslate nohighlight">\(\Choose{n}{k}\)</span> is the binomial coefficient (you encountered it in the statistics course!).
+Note, in particular, <span class="math notranslate nohighlight">\(\Choose{n}{0} = \Choose{n}{n} = 1\)</span> and <span class="math notranslate nohighlight">\(\Choose{n}{1} = n\)</span>.</p>
+<section id="example-exercise">
+<h4><span class="section-number">3.1.2.1. </span>Example/Exercise<a class="headerlink" href="#example-exercise" title="Permalink to this heading">#</a></h4>
+<p>Expand <span class="math notranslate nohighlight">\((x+dx)^4\)</span> and <span class="math notranslate nohighlight">\((x+dx)^5\)</span>.  Identify the derivatives of <span class="math notranslate nohighlight">\(x^4\)</span> and <span class="math notranslate nohighlight">\(x^5\)</span> based on Eq.<a class="reference internal" href="#equation-linearapp">(3.1)</a>.
+[See below for the values of binomial coefficients.]</p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\((x+dx)^4 = x^4 + 4x^3 dx ~~\therefore (x^4)' = 4x^3\)</span></p>
+<p><span class="math notranslate nohighlight">\((x+dx)^5 = x^5 + 5x^4 dx ~~\therefore (x^5)' = 5x^4\)</span></p>
+</div>
+</section>
+</section>
+<section id="digression-pascal-s-triangle">
+<h3><span class="section-number">3.1.3. </span>Digression: Pascal’s triangle<a class="headerlink" href="#digression-pascal-s-triangle" title="Permalink to this heading">#</a></h3>
+<p>The binomial coefficients can be generated using Pascal’s triangle:</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">scipy.special</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="k">def</span> <span class="nf">downarrows</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="n">dx</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">;</span> <span class="n">off</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">;</span> <span class="n">dy</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">;</span> <span class="n">w</span> <span class="o">=</span> <span class="mf">0.03</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">off</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="o">-</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">w</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">off</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="n">w</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">));</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mf">5.5</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">5</span> <span class="o">-</span> <span class="n">i</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="n">i</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">j</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">5</span><span class="p">:</span> 
+            <span class="n">downarrows</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">6</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span> <span class="n">downarrows</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">6</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">6</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">sp</span><span class="o">.</span><span class="n">binom</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">))</span> <span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">6</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">y</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;$_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;C_&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">2.5</span><span class="p">,</span> <span class="s2">&quot;=&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="_images/c9add87687f6989b5aff914d9247f430ab823b7dcb76a75eb46ce2a8880fa4a0.png" src="_images/c9add87687f6989b5aff914d9247f430ab823b7dcb76a75eb46ce2a8880fa4a0.png" />
+</div>
+</div>
+<section id="id1">
+<h4><span class="section-number">3.1.3.1. </span>Example/Exercise<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
+<p>Write code to compute (<span class="math notranslate nohighlight">\(\Choose{n}{0}, \Choose{n}{1}, \Choose{n}{2}, \cdots, \Choose{n}{n}\)</span>) using Pascal’s triangle.</p>
+<p><small>Hint: Prepare a vector of length <span class="math notranslate nohighlight">\(n\)</span>, <span class="math notranslate nohighlight">\(v = [1,0,0,\cdots, 0]\)</span>. Then, Update the vector <span class="math notranslate nohighlight">\(n\)</span> times as <span class="math notranslate nohighlight">\(v[j] + v[j-1]\to v[j]\)</span> from <span class="math notranslate nohighlight">\(j=1\)</span> to <span class="math notranslate nohighlight">\(n-1\)</span>.</small></p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p>Here’s one possible solution:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binomialCoefficients</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">n</span><span class="o">*</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">v_tmp</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">v_tmp</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">v_tmp</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">v</span>
+</pre></div>
+</div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="power-rule">
+<h2><span class="section-number">3.2. </span>Power Rule<a class="headerlink" href="#power-rule" title="Permalink to this heading">#</a></h2>
+<p>As we saw in previous exercise problems, the expansion of <span class="math notranslate nohighlight">\((x + dx)^n\)</span> gives</p>
+<div class="amsmath math notranslate nohighlight" id="equation-65e15a21-5339-4a8c-9d86-1cf7b28b1cfc">
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-65e15a21-5339-4a8c-9d86-1cf7b28b1cfc" title="Permalink to this equation">#</a></span>\[\begin{align}
+(x + dx)^n &amp;= x^n + \Choose{n}{1} x^{n-1} dx + \Choose{n}{2} x^{n-2} dx^2 + \Choose{n}{3} x^{n-3} dx^3
++ \cdots\nonumber\\
+&amp; = x^n +n x^{n-1} dx + \bigO{dx^2},
+\end{align}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bigO{dx^2}\)</span> means ``the terms of order <span class="math notranslate nohighlight">\(dx^2\)</span> or higher’’, which is zero here.
+Hence,  Eq.<a class="reference internal" href="#equation-linearapp">(3.1)</a> tells us that the derivative of <span class="math notranslate nohighlight">\(x^n\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+(x^n)' = n x^{n-1}.
+\]</div>
+<p>Although we assumed <span class="math notranslate nohighlight">\(n\)</span> was an integer, it turns out that this formula works for any real number.</p>
+<div class="dropdown admonition note">
+<p class="admonition-title">Note</p>
+<p>Here is proof (which requires the chain rule though) :
+<span class="math notranslate nohighlight">\(\ds (x^n)' = (e^{n \ln x})' = e^{n\ln x}\cdot n\cdot\frac{1}{x} = x^n\cdot n\cdot\frac{1}{x} = nx^{n-1}\)</span>, which works for any real number <span class="math notranslate nohighlight">\(n\)</span>.</p>
+</div>
+<section id="examples-exercises">
+<h3><span class="section-number">3.2.1. </span>Examples/Exercises<a class="headerlink" href="#examples-exercises" title="Permalink to this heading">#</a></h3>
+<p>Find the derivatives.</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\((x^{1024})' = \)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\((x^{1024})' = 1024 x^{1023}\)</span></p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><span class="math notranslate nohighlight">\((x^{3.14})' = \)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\((x^{3.14})' = 3.14 x^{2.14}\)</span></p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><span class="math notranslate nohighlight">\(\ds\left(\frac{1}{x}\right)' = \)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds\left(\frac{1}{x}\right)' = -\frac{1}{x^2}\)</span></p>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><span class="math notranslate nohighlight">\(\ds\left(\frac{1}{x^2}\right)' = \)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds\left(\frac{1}{x^2}\right)' = -\frac{2}{x^3}\)</span></p>
+</div>
+<ol class="arabic simple" start="5">
+<li><p><span class="math notranslate nohighlight">\((\sqrt{x})' = \)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds (\sqrt{x})' = \frac{1}{2\sqrt{x}}\)</span></p>
+</div>
+<ol class="arabic simple" start="6">
+<li><p><span class="math notranslate nohighlight">\((\sqrt[3]{x})' = \)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds (\sqrt[3]{x})' = \frac{1}{3\sqrt[3]{x^2}}\)</span></p>
+</div>
+<ol class="arabic simple" start="7">
+<li><p><span class="math notranslate nohighlight">\((\sqrt{x^3})' = \)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\((\sqrt{x^3})' = \frac{3}{2}\sqrt{x}\)</span></p>
+</div>
+<ol class="arabic simple" start="8">
+<li><p><span class="math notranslate nohighlight">\(\ds\left(\frac{x^3}{\sqrt{x}}\right)' = \)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds\left(\frac{x^3}{\sqrt{x}}\right)' = \frac{5}{2}\sqrt{x^3}\)</span></p>
+</div>
+</section>
+</section>
+<section id="product-rule">
+<h2><span class="section-number">3.3. </span>Product Rule<a class="headerlink" href="#product-rule" title="Permalink to this heading">#</a></h2>
+<p>Let us find the derivative of the product of two functions <span class="math notranslate nohighlight">\(f(x) = u(x)\cdot v(x)\)</span> using Eq.<a class="reference internal" href="#equation-linearapp">(3.1)</a>.</p>
+<div class="amsmath math notranslate nohighlight" id="equation-ff6093f8-5a1e-4411-af5f-7ae4f327599c">
+<span class="eqno">(3.5)<a class="headerlink" href="#equation-ff6093f8-5a1e-4411-af5f-7ae4f327599c" title="Permalink to this equation">#</a></span>\[\begin{align}
+f(x+dx) &amp;= u(x+dx)\cdot v(x+dx) = (u(x) + u'(x) dx) (v(x) + v'(x) dx)\nonumber\\
+&amp;= u(x)v(x) + u'(x)v(x) dx + u(x)v'(x) dx + u'(x) v'(x) dx^2\nonumber\\ 
+&amp;= u(x)v(x) + (u'(x)v(x) + u(x)v'(x)) dx ~~~ \because dx^2 = 0
+\end{align}\]</div>
+<p>Thus,</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e99c3563-3d9d-4e06-8522-c738949df5e0">
+<span class="eqno">(3.6)<a class="headerlink" href="#equation-e99c3563-3d9d-4e06-8522-c738949df5e0" title="Permalink to this equation">#</a></span>\[\begin{align}
+f'(x) = (u(x)\cdot v(x))' = u'(x)v(x) + u(x)v'(x) 
+\end{align}\]</div>
+<p>Similarly, the derivative of <span class="math notranslate nohighlight">\(f(x) = u(x)\cdot v(x)\cdot w(x)\)</span> is</p>
+<div class="amsmath math notranslate nohighlight" id="equation-81d23235-0b40-4ae4-b073-b2a102458bbe">
+<span class="eqno">(3.7)<a class="headerlink" href="#equation-81d23235-0b40-4ae4-b073-b2a102458bbe" title="Permalink to this equation">#</a></span>\[\begin{align}
+f'(x) = (u\cdot v\cdot w)' = u'\cdot v\cdot w+ u\cdot v'\cdot  w+ u\cdot v\cdot w'
+\end{align}\]</div>
+<section id="id2">
+<h3><span class="section-number">3.3.1. </span>Examples/Exercises<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<p>Compute the following derivatives.</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\((x e^x)' = \)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\((x e^x)' = (1+x)e^x\)</span></p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><span class="math notranslate nohighlight">\(\ds\left(\frac{\sin x}{x}\right)' = \)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds\left(\frac{\sin x}{x}\right)' = \frac{\cos x}{x}-\frac{\sin x}{x^2}\)</span></p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><span class="math notranslate nohighlight">\((\sqrt{x}\, e^x \cos x)'=\)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds (\sqrt{x}\, e^x \cos x)'=e^x\left[(\sqrt{x}+\frac{1}{2\sqrt{x}})\cos x - \sqrt{x}\,\sin x\right]\)</span></p>
+</div>
+<ol class="arabic simple" start="4">
+<li><p><span class="math notranslate nohighlight">\(\log_2(x^x)'=\)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\log_2(x^x)'=1.443 + \log_2 x\)</span></p>
+</div>
+</section>
+</section>
+<section id="quotient-rule">
+<h2><span class="section-number">3.4. </span>Quotient Rule<a class="headerlink" href="#quotient-rule" title="Permalink to this heading">#</a></h2>
+<p>The quotient rule is for functions in the form <span class="math notranslate nohighlight">\(\ds f(x) = \frac{u(x)}{v(x)}\)</span>.  Expanding <span class="math notranslate nohighlight">\(f(x+dx)\)</span> as usual, we obtain</p>
+<div class="math notranslate nohighlight" id="equation-quotient0">
+<span class="eqno">(3.8)<a class="headerlink" href="#equation-quotient0" title="Permalink to this equation">#</a></span>\[
+f(x+dx) = \frac{u(x+dx)}{v(x+dx)} = \frac{u(x)+u'(x) dx}{v(x)+v'(x)dx} = \frac{u(x)+u'(x) dx}{v(x)}\frac{1}{1+\frac{v'(x)}{v(x)}dx}.
+\]</div>
+<p>Noting that the geometric series converges to</p>
+<div class="amsmath math notranslate nohighlight" id="equation-66562e54-410c-47ac-b21e-817f394e8a6a">
+<span class="eqno">(3.9)<a class="headerlink" href="#equation-66562e54-410c-47ac-b21e-817f394e8a6a" title="Permalink to this equation">#</a></span>\[\begin{align}
+1+r+r^2+r^3+r^4 + \cdots = \frac{1}{1-r} ~~~\text{for}~ |r|&lt;1,
+\end{align}\]</div>
+<p>we have</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3986cd46-d7a9-479c-acf0-123cfc8655df">
+<span class="eqno">(3.10)<a class="headerlink" href="#equation-3986cd46-d7a9-479c-acf0-123cfc8655df" title="Permalink to this equation">#</a></span>\[\begin{align}
+\frac{1}{1+\frac{v'}{v}dx} &amp;= \frac{1}{1- (-\frac{v'}{v}dx)} = 1+(-\frac{v'}{v}dx)+(-\frac{v'}{v}dx)^2+\cdots\nonumber\\
+&amp;= 1 - \frac{v'}{v}dx~~~~~ \because dx^2 = 0.
+\end{align}\]</div>
+<p>Thus, Eq.<a class="reference internal" href="#equation-quotient0">(3.8)</a> becomes</p>
+<div class="amsmath math notranslate nohighlight" id="equation-3b3c9027-7d45-44bf-b6c8-f07ec5212085">
+<span class="eqno">(3.11)<a class="headerlink" href="#equation-3b3c9027-7d45-44bf-b6c8-f07ec5212085" title="Permalink to this equation">#</a></span>\[\begin{align}\label{quotient1}
+f(x+dx) &amp;= \frac{(u+u' dx)(1 - \frac{v'}{v}dx)}{v} = \frac{u - \frac{uv'}{v}dx+u'dx+\bigO{dx^2}}{v}\\
+&amp;= \frac{u}{v} + \frac{u' v - u v'}{v^2}\, dx.
+\end{align}\]</div>
+<p>Finally, we have</p>
+<div class="math notranslate nohighlight" id="equation-quotient-rule">
+<span class="eqno">(3.12)<a class="headerlink" href="#equation-quotient-rule" title="Permalink to this equation">#</a></span>\[
+f'(x) = \left(\frac{u(x)}{v(x)}\right)' = \frac{u'(x) v(x) - u(x) v'(x)}{v(x)^2}.
+\]</div>
+<section id="id3">
+<h3><span class="section-number">3.4.1. </span>Examples/Exercises<a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>Compute the following derivatives using the quotient rule.</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\ds \left(\tan x\right)' = \)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds \left(\tan x\right)' = \frac{1}{\cos^2 x} = \frac{1}{\sec^2 x}\)</span></p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p><span class="math notranslate nohighlight">\(\ds\left(\frac{\sin x}{x}\right)' = \)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds\left(\frac{\sin x}{x}\right)' = \frac{\cos x}{x}-\frac{\sin x}{x^2}\)</span></p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p><span class="math notranslate nohighlight">\(\ds\left(\frac{\ln x}{x^2}\right)'=\)</span></p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds\left(\frac{\ln x}{x^2}\right)'=\frac{1-2\ln x}{x^3}\)</span></p>
+</div>
+</section>
+</section>
+<section id="linearity-of-differentiation">
+<h2><span class="section-number">3.5. </span>Linearity of differentiation<a class="headerlink" href="#linearity-of-differentiation" title="Permalink to this heading">#</a></h2>
+<p>The linearity of differentiation means</p>
+<div class="math notranslate nohighlight" id="equation-linearitya">
+<span class="eqno">(3.13)<a class="headerlink" href="#equation-linearitya" title="Permalink to this equation">#</a></span>\[
+(f(x) + g(x))' =  f'(x) + g'(x) ~~~ \text{and}~~~ (a f(x))' = a f'(x).
+\]</div>
+<p>Or putting them together, we have</p>
+<div class="math notranslate nohighlight" id="equation-linearity">
+<span class="eqno">(3.14)<a class="headerlink" href="#equation-linearity" title="Permalink to this equation">#</a></span>\[
+(af(x) + b\,g(x))' = a f'(x) + b\, g'(x),
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(a\)</span> and <span class="math notranslate nohighlight">\(b\)</span> are constants, and <span class="math notranslate nohighlight">\(f\)</span> and <span class="math notranslate nohighlight">\(g\)</span> are functions. The proof is straight forward:</p>
+<div class="amsmath math notranslate nohighlight" id="equation-e071abe6-e108-4239-a701-e8be06a92abb">
+<span class="eqno">(3.15)<a class="headerlink" href="#equation-e071abe6-e108-4239-a701-e8be06a92abb" title="Permalink to this equation">#</a></span>\[\begin{align}
+af(x+dx) + b\,g(x+dx) &amp;= a(f(x) +f'(x)dx) + b(g(x)+ g'(x)dx)\nonumber\\
+&amp;= (af(x) + b\,g(x)) +  (a f'(x) + b\, g'(x))dx,
+\end{align}\]</div>
+<p>which leads to the relationship <a class="reference internal" href="#equation-linearity">(3.14)</a>.</p>
+<section id="id4">
+<h3><span class="section-number">3.5.1. </span>Examples/Exercises<a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p>Compute the following derivatives.</p></li>
+</ol>
+<p>  a. <span class="math notranslate nohighlight">\(\ds \left(x + \frac{1}{2}\,x^2 + \frac{1}{3}\,x^3\right)' = \)</span></p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds \left(x + \frac{1}{2}\,x^2 + \frac{1}{3}\,x^3\right)' = 1+x+x^2\)</span></p>
+</div>
+<p>  b. <span class="math notranslate nohighlight">\(\ds\left(\frac{\sin x + \cos x}{2}\right)' = \)</span></p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds\left(\frac{\sin x + \cos x}{2}\right)' = \frac{\cos x - \sin x}{2}\)</span></p>
+</div>
+<p>  c. <span class="math notranslate nohighlight">\(\ds\left(\frac{2 e^x}{1+e^x}\right)'=\)</span></p>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(\ds\left(\frac{2 e^x}{1+e^x}\right)'=\frac{2 e^x}{(1+e^x)^2}\)</span></p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>The odometer reading of an autonomous vehicle is mathematically modeled as
+<span class="math notranslate nohighlight">\(x(t) =  4.2 t^{1.8} - 0.9 t^{2.8}\)</span>. Find its speed <span class="math notranslate nohighlight">\(v = \frac{dx}{dt}\)</span> at <span class="math notranslate nohighlight">\(t= 3.0\)</span>.</p></li>
+</ol>
+<div class="dropdown admonition">
+<p class="admonition-title">Answer</p>
+<p><span class="math notranslate nohighlight">\(v = 0\)</span></p>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Unit2_derivative.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>The Derivative</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Unit4_chain_rule.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Chain Rule</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#infinitesimals">3.1. Infinitesimals</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-excercise">3.1.1. Example/Excercise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#review-expansion-of-a-b-n">3.1.2. Review: Expansion of <span class="math notranslate nohighlight">\((a+b)^n\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#example-exercise">3.1.2.1. Example/Exercise</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#digression-pascal-s-triangle">3.1.3. Digression: Pascal’s triangle</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.1.3.1. Example/Exercise</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#power-rule">3.2. Power Rule</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#examples-exercises">3.2.1. Examples/Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#product-rule">3.3. Product Rule</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">3.3.1. Examples/Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#quotient-rule">3.4. Quotient Rule</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">3.4.1. Examples/Exercises</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linearity-of-differentiation">3.5. Linearity of differentiation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">3.5.1. Examples/Exercises</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Takashi Nakamura
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

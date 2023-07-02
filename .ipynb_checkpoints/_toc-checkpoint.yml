@@ -1,0 +1,12 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+options:
+  numbered: true
+chapters:
+- file: Unit1_introduction
+- file: Unit2_derivative
+- file: Unit3_derivative_rules
+- file: Unit4_chain_rule

@@ -1,0 +1,118 @@
+Traceback (most recent call last):
+  File "C:\Python311\Lib\site-packages\jupyter_cache\executors\utils.py", line 58, in single_nb_execution
+    executenb(
+  File "C:\Python311\Lib\site-packages\nbclient\client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\site-packages\jupyter_core\utils\__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\asyncio\base_events.py", line 653, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "C:\Python311\Lib\site-packages\nbclient\client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "C:\Python311\Lib\site-packages\nbclient\client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "C:\Python311\Lib\site-packages\nbclient\client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+from numpy import pi, arange, sin, cos, concatenate, flip, array, sqrt, linspace
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+
+N = 24; 
+def XY(s):
+    r = 1/(1-s); dt = pi/N/r
+    idx = arange(0, N+1); t = dt * idx
+    def xf(t): return r * sin(t)
+    def yf(t): return r * (1 - cos(t))
+    x = xf(t); y = yf(t)
+    for i in idx:
+        if i%2 == 1:
+            x[i] += -sin(t[i]); y[i] += cos(t[i])
+    X = concatenate(( flip(-x), x, flip(xf(t)), -xf(t) ))
+    Y = concatenate(( flip(y), y, flip(yf(t)), yf(t) ))
+    return X, Y
+
+def Arrow(x0,y0,x1,y1,hw=0.05,al=0.15): #hw: arrowhead width, al: arrowhead length
+    v = array([x1-x0, y1-y0])
+    pu = v/sqrt(sum(v**2)) # unit vector parallel to the arrow
+    nu = array([ pu[1], -pu[0] ]) # unit vector normal to the arrow
+    tip = array([x1, y1]) #Coordinates at the tip of the arrow
+    hp = tip - al*pu + hw*nu; hm = tip - al*pu - hw*nu
+    ax.plot( [x0, x1], [y0, y1], [hp[0], x1, hm[0]], [hp[1], y1, hm[1]], lw=0.5, color="k")
+
+fig = plt.figure(figsize=(6.7,3.2))
+ax = plt.axes( xlim =(-3.5, 3.2), ylim =(-0.6, 2.6), xticks=[], yticks=[] )
+graph, = ax.plot([], [], lw = 0.5); plt.close(fig)
+
+frames = 100
+s = linspace(0,0.999, frames)
+def animate(i):
+    graph.set_data( XY(s[i]) )
+    if i == frames-1:
+        Arrow(-0.5,-0.2, -np.pi,-0.2); Arrow(0.5,-0.2, np.pi,-0.2); ax.text(-0.15, -0.25, '$2\pi r$')
+        Arrow(-3.3,0.35, -3.3,0); Arrow(-3.3,0.65, -3.3,1.0); ax.text(-3.35, 0.45, '$r$')
+    elif i == 0:
+        ax.text(-2.7, 2.35, 'Opening up a circle of radius $r$ (circumference = $2\pi r$)')
+    return graph
+ 
+anim = animation.FuncAnimation(fig, animate,  frames = frames, interval = 30, blit = False)
+
+from IPython.display import HTML
+HTML(anim.to_jshtml(default_mode = 'once'))
+------------------
+
+
+[1;31m---------------------------------------------------------------------------[0m
+[1;31mNameError[0m                                 Traceback (most recent call last)
+Cell [1;32mIn[1], line 45[0m
+[0;32m     42[0m anim [38;5;241m=[39m animation[38;5;241m.[39mFuncAnimation(fig, animate,  frames [38;5;241m=[39m frames, interval [38;5;241m=[39m [38;5;241m30[39m, blit [38;5;241m=[39m [38;5;28;01mFalse[39;00m)
+[0;32m     44[0m [38;5;28;01mfrom[39;00m [38;5;21;01mIPython[39;00m[38;5;21;01m.[39;00m[38;5;21;01mdisplay[39;00m [38;5;28;01mimport[39;00m HTML
+[1;32m---> 45[0m HTML([43manim[49m[38;5;241;43m.[39;49m[43mto_jshtml[49m[43m([49m[43mdefault_mode[49m[43m [49m[38;5;241;43m=[39;49m[43m [49m[38;5;124;43m'[39;49m[38;5;124;43monce[39;49m[38;5;124;43m'[39;49m[43m)[49m)
+
+File [1;32mC:\Python311\Lib\site-packages\matplotlib\animation.py:1352[0m, in [0;36mAnimation.to_jshtml[1;34m(self, fps, embed_frames, default_mode)[0m
+[0;32m   1348[0m         path [38;5;241m=[39m Path(tmpdir, [38;5;124m"[39m[38;5;124mtemp.html[39m[38;5;124m"[39m)
+[0;32m   1349[0m         writer [38;5;241m=[39m HTMLWriter(fps[38;5;241m=[39mfps,
+[0;32m   1350[0m                             embed_frames[38;5;241m=[39membed_frames,
+[0;32m   1351[0m                             default_mode[38;5;241m=[39mdefault_mode)
+[1;32m-> 1352[0m         [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43msave[49m[43m([49m[38;5;28;43mstr[39;49m[43m([49m[43mpath[49m[43m)[49m[43m,[49m[43m [49m[43mwriter[49m[38;5;241;43m=[39;49m[43mwriter[49m[43m)[49m
+[0;32m   1353[0m         [38;5;28mself[39m[38;5;241m.[39m_html_representation [38;5;241m=[39m path[38;5;241m.[39mread_text()
+[0;32m   1355[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_html_representation
+
+File [1;32mC:\Python311\Lib\site-packages\matplotlib\animation.py:1103[0m, in [0;36mAnimation.save[1;34m(self, filename, writer, fps, dpi, codec, bitrate, extra_args, metadata, extra_anim, savefig_kwargs, progress_callback)[0m
+[0;32m   1100[0m [38;5;28;01mfor[39;00m data [38;5;129;01min[39;00m [38;5;28mzip[39m([38;5;241m*[39m[a[38;5;241m.[39mnew_saved_frame_seq() [38;5;28;01mfor[39;00m a [38;5;129;01min[39;00m all_anim]):
+[0;32m   1101[0m     [38;5;28;01mfor[39;00m anim, d [38;5;129;01min[39;00m [38;5;28mzip[39m(all_anim, data):
+[0;32m   1102[0m         [38;5;66;03m# TODO: See if turning off blit is really necessary[39;00m
+[1;32m-> 1103[0m         [43manim[49m[38;5;241;43m.[39;49m[43m_draw_next_frame[49m[43m([49m[43md[49m[43m,[49m[43m [49m[43mblit[49m[38;5;241;43m=[39;49m[38;5;28;43;01mFalse[39;49;00m[43m)[49m
+[0;32m   1104[0m         [38;5;28;01mif[39;00m progress_callback [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m [38;5;28;01mNone[39;00m:
+[0;32m   1105[0m             progress_callback(frame_number, total_frames)
+
+File [1;32mC:\Python311\Lib\site-packages\matplotlib\animation.py:1138[0m, in [0;36mAnimation._draw_next_frame[1;34m(self, framedata, blit)[0m
+[0;32m   1134[0m [38;5;28;01mdef[39;00m [38;5;21m_draw_next_frame[39m([38;5;28mself[39m, framedata, blit):
+[0;32m   1135[0m     [38;5;66;03m# Breaks down the drawing of the next frame into steps of pre- and[39;00m
+[0;32m   1136[0m     [38;5;66;03m# post- draw, as well as the drawing of the frame itself.[39;00m
+[0;32m   1137[0m     [38;5;28mself[39m[38;5;241m.[39m_pre_draw(framedata, blit)
+[1;32m-> 1138[0m     [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_draw_frame[49m[43m([49m[43mframedata[49m[43m)[49m
+[0;32m   1139[0m     [38;5;28mself[39m[38;5;241m.[39m_post_draw(framedata, blit)
+
+File [1;32mC:\Python311\Lib\site-packages\matplotlib\animation.py:1767[0m, in [0;36mFuncAnimation._draw_frame[1;34m(self, framedata)[0m
+[0;32m   1763[0m     [38;5;28mself[39m[38;5;241m.[39m_save_seq [38;5;241m=[39m [38;5;28mself[39m[38;5;241m.[39m_save_seq[[38;5;241m-[39m[38;5;28mself[39m[38;5;241m.[39m_save_count:]
+[0;32m   1765[0m [38;5;66;03m# Call the func with framedata and args. If blitting is desired,[39;00m
+[0;32m   1766[0m [38;5;66;03m# func needs to return a sequence of any artists that were modified.[39;00m
+[1;32m-> 1767[0m [38;5;28mself[39m[38;5;241m.[39m_drawn_artists [38;5;241m=[39m [38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_func[49m[43m([49m[43mframedata[49m[43m,[49m[43m [49m[38;5;241;43m*[39;49m[38;5;28;43mself[39;49m[38;5;241;43m.[39;49m[43m_args[49m[43m)[49m
+[0;32m   1769[0m [38;5;28;01mif[39;00m [38;5;28mself[39m[38;5;241m.[39m_blit:
+[0;32m   1771[0m     err [38;5;241m=[39m [38;5;167;01mRuntimeError[39;00m([38;5;124m'[39m[38;5;124mThe animation function must return a sequence [39m[38;5;124m'[39m
+[0;32m   1772[0m                        [38;5;124m'[39m[38;5;124mof Artist objects.[39m[38;5;124m'[39m)
+
+Cell [1;32mIn[1], line 36[0m, in [0;36manimate[1;34m(i)[0m
+[0;32m     34[0m graph[38;5;241m.[39mset_data( XY(s[i]) )
+[0;32m     35[0m [38;5;28;01mif[39;00m i [38;5;241m==[39m frames[38;5;241m-[39m[38;5;241m1[39m:
+[1;32m---> 36[0m     Arrow([38;5;241m-[39m[38;5;241m0.5[39m,[38;5;241m-[39m[38;5;241m0.2[39m, [38;5;241m-[39m[43mnp[49m[38;5;241m.[39mpi,[38;5;241m-[39m[38;5;241m0.2[39m); Arrow([38;5;241m0.5[39m,[38;5;241m-[39m[38;5;241m0.2[39m, np[38;5;241m.[39mpi,[38;5;241m-[39m[38;5;241m0.2[39m); ax[38;5;241m.[39mtext([38;5;241m-[39m[38;5;241m0.15[39m, [38;5;241m-[39m[38;5;241m0.25[39m, [38;5;124m'[39m[38;5;124m$2[39m[38;5;124m\[39m[38;5;124mpi r$[39m[38;5;124m'[39m)
+[0;32m     37[0m     Arrow([38;5;241m-[39m[38;5;241m3.3[39m,[38;5;241m0.35[39m, [38;5;241m-[39m[38;5;241m3.3[39m,[38;5;241m0[39m); Arrow([38;5;241m-[39m[38;5;241m3.3[39m,[38;5;241m0.65[39m, [38;5;241m-[39m[38;5;241m3.3[39m,[38;5;241m1.0[39m); ax[38;5;241m.[39mtext([38;5;241m-[39m[38;5;241m3.35[39m, [38;5;241m0.45[39m, [38;5;124m'[39m[38;5;124m$r$[39m[38;5;124m'[39m)
+[0;32m     38[0m [38;5;28;01melif[39;00m i [38;5;241m==[39m [38;5;241m0[39m:
+
+[1;31mNameError[0m: name 'np' is not defined
+
